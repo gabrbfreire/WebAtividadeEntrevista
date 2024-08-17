@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FI.WebAtividadeEntrevista.Models.Validation;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace WebAtividadeEntrevista.Models
 {
@@ -12,7 +9,7 @@ namespace WebAtividadeEntrevista.Models
     public class ClienteModel
     {
         public long Id { get; set; }
-        
+
         /// <summary>
         /// CEP
         /// </summary>
@@ -67,5 +64,11 @@ namespace WebAtividadeEntrevista.Models
         /// </summary>
         public string Telefone { get; set; }
 
-    }    
+        /// <summary>
+        /// CPF
+        /// </summary>
+        [Required]
+        [CpfAttribute (ErrorMessage = "Digite um CPF válido")]
+        public string CPF { get; set; }
+    }
 }
