@@ -37,7 +37,6 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
-
                 model.Id = bo.Incluir(new Cliente()
                 {
                     CEP = model.CEP,
@@ -51,7 +50,6 @@ namespace WebAtividadeEntrevista.Controllers
                     Telefone = model.Telefone,
                     CPF = model.CPF
                 });
-
 
                 return Json("Cadastro efetuado com sucesso");
             }
@@ -115,8 +113,6 @@ namespace WebAtividadeEntrevista.Controllers
                     Telefone = cliente.Telefone,
                     CPF = cliente.CPF
                 };
-
-
             }
 
             return View(model);

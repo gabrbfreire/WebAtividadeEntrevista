@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace FI.WebAtividadeEntrevista.Models.Validation
 {
     public class CpfAttribute : ValidationAttribute
     {
-        private int ExpectedLenght = 11;
         public CpfAttribute() { }
 
         public override bool IsValid(object value)
@@ -16,7 +16,7 @@ namespace FI.WebAtividadeEntrevista.Models.Validation
             {
                 cpf = cpf.Trim().Replace(".", "").Replace("-", "");
 
-                if (cpf.Length != ExpectedLenght) 
+                if (cpf.Length != 11 || cpf.All(c => c == cpf[0])) 
                     return false;
 
                 int[] multiplicadores1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
