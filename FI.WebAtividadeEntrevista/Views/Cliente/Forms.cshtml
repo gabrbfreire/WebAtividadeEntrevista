@@ -79,12 +79,65 @@
 
     <div class="row">
         <div class="col-lg-12">
+            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalBeneficiarios">
+                Beneficiários
+            </button>
             <div class="pull-right">
                 <button type="submit" class="btn btn-sm btn-success">Salvar</button>
                 @Html.ActionLink("Voltar", "Index", "Cliente", new { }, new { @class = "btn btn-sm btn-danger" })
             </div>
         </div>
     </div>
-
-
 </form>
+
+<div class="modal fade" id="modalBeneficiarios" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Beneficiários</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="margin-top: 40px;>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="CPF">CPF:</label>
+                        <input required="required" type="text" class="form-control" id="CpfBeneficiario" name="CpfBeneficiario" placeholder="Ex.: 010.011.111-00" data-mask="000.000.000-00">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="Nome">Nome:</label>
+                        <input required="required" type="text" class="form-control" id="NomeBeneficiario" name="NomeBeneficiario" placeholder="Ex.: João" maxlength="50">
+                    </div>
+                    <div class="col-md-4">
+                        <label> </label>
+                        <button type="button" class="btn btn-success">Success</button>
+                    </div>
+                </div>
+
+                <table class="table" style="margin-top: 40px;">
+                    <thead>
+                        <tr>
+                            <th scope="col">CPF</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
