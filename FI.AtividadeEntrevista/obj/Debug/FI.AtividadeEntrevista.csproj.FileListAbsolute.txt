@@ -1,6 +1,0 @@
-C:\Users\GabF\Desktop\New folder\FI.AtividadeEntrevista\bin\Debug\FI.AtividadeEntrevista.dll
-C:\Users\GabF\Desktop\New folder\FI.AtividadeEntrevista\bin\Debug\FI.AtividadeEntrevista.pdb
-C:\Users\GabF\Desktop\New folder\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.csproj.AssemblyReference.cache
-C:\Users\GabF\Desktop\New folder\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.csproj.CoreCompileInputs.cache
-C:\Users\GabF\Desktop\New folder\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.dll
-C:\Users\GabF\Desktop\New folder\FI.AtividadeEntrevista\obj\Debug\FI.AtividadeEntrevista.pdb
