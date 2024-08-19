@@ -9,7 +9,7 @@ namespace WebAtividadeEntrevista.Models
     public class BeneficiarioModel
     {
         public long Id { get; set; }
-        public string IdCliente { get; set; }
+        public long IdCliente { get; set; }
 
         /// <summary>
         /// CPF

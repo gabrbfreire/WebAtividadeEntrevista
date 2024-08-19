@@ -1,5 +1,4 @@
-﻿
-<form id="formCadastro" method="post">
+﻿<form id="formCadastro" method="post">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -88,60 +87,50 @@
             </div>
         </div>
     </div>
+</form>
 
-    <div class="modal fade" id="modalBeneficiarios" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="modal-title" id="exampleModalLabel">Beneficiários</span>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body" style="margin-top: 40px;">
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="CPF">CPF:</label>
-                            <input required="required" type="text" class="form-control" id="CpfBeneficiario" name="CpfBeneficiario" placeholder="Ex.: 010.011.111-00" data-mask="000.000.000-00">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="Nome">Nome:</label>
-                            <input required="required" type="text" class="form-control" id="NomeBeneficiario" name="NomeBeneficiario" placeholder="Ex.: João" maxlength="50">
-                        </div>
-                        <div class="col-md-4">
-                            <label style="height: 40px"></label>
-                            <button type="button" class="btn btn-success">Incluir</button>
-                        </div>
+<div class="modal fade" id="modalBeneficiarios" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title" id="exampleModalLabel">Beneficiários</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="margin-top: 40px;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="CPF">CPF:</label>
+                        <input required="required" type="text" class="form-control" id="CpfBeneficiario" name="CpfBeneficiario" placeholder="Ex.: 010.011.111-00" data-mask="000.000.000-00">
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table" style="margin-top: 40px; margin-bottom: 40px;">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">CPF</th>
-                                        <th scope="col">Nome</th>
-                                        <th scope="col">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td style="width:20%">010.011.111-00</td>
-                                        <td style="width:50%">Mark</td>
-                                        <td style="width:30%">
-                                            <button type="button" class="btn btn-primary">Alterar</button>
-                                            <button type="button" class="btn btn-primary">Excluir</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="col-md-4">
+                        <label for="Nome">Nome:</label>
+                        <input required="required" type="text" class="form-control" id="NomeBeneficiario" name="NomeBeneficiario" placeholder="Ex.: João" maxlength="50" minlength="1">
                     </div>
-
+                    <div class="col-md-4">
+                        <label style="height: 40px"></label>
+                        <button type="button" class="btn btn-success" id="buttonIncluir">Incluir</button>
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table" style="margin-top: 40px; margin-bottom: 40px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">CPF</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</form>
-
+</div>

@@ -50,7 +50,8 @@ namespace WebAtividadeEntrevista.Controllers
                 Nome = model.Nome,
                 Sobrenome = model.Sobrenome,
                 Telefone = model.Telefone,
-                CPF = model.CPF
+                CPF = model.CPF,
+                Beneficiarios = model.Beneficiarios
             });
 
             return Json("Cadastro efetuado com sucesso");

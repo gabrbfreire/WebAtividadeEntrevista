@@ -1,6 +1,8 @@
 ﻿using FI.AtividadeEntrevista.DML;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace FI.AtividadeEntrevista.DAL
@@ -28,6 +30,7 @@ namespace FI.AtividadeEntrevista.DAL
             parametros.Add(new System.Data.SqlClient.SqlParameter("Email", cliente.Email));
             parametros.Add(new System.Data.SqlClient.SqlParameter("Telefone", cliente.Telefone));
             parametros.Add(new System.Data.SqlClient.SqlParameter("CPF", cliente.CPF));
+            parametros.Add(new System.Data.SqlClient.SqlParameter("BENEFICIARIOS", cliente.Beneficiarios));
 
             DataSet ds = base.Consultar("FI_SP_IncClienteV2", parametros);
             long ret = 0;
