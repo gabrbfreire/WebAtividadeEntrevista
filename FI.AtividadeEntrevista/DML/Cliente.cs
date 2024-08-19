@@ -1,4 +1,6 @@
-﻿namespace FI.AtividadeEntrevista.DML
+﻿using System.Collections.Generic;
+
+namespace FI.AtividadeEntrevista.DML
 {
     /// <summary>
     /// Classe de cliente que representa o registo na tabela Cliente do Banco de Dados
@@ -59,5 +61,7 @@
         /// CPF
         /// </summary>
         public string CPF { get; set; }
+
+        public IList<Beneficiario> Beneficiarios { get; set; }
     }
 }

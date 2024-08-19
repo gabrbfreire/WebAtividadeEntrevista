@@ -1,4 +1,5 @@
 ﻿using FI.WebAtividadeEntrevista.Models.Validation;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebAtividadeEntrevista.Models
@@ -70,5 +71,7 @@ namespace WebAtividadeEntrevista.Models
         [Required]
         [CpfAttribute (ErrorMessage = "Digite um CPF válido")]
         public string CPF { get; set; }
+
+        public IList<BeneficiarioModel> Beneficiarios { get; set; }
     }
 }
