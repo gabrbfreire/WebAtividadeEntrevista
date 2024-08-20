@@ -69,7 +69,7 @@ namespace WebAtividadeEntrevista.Controllers
         {
             BoCliente bo = new BoCliente();
 
-            if (bo.VerificarExistencia(model.CPF))
+            if (bo.VerificarExistencia(model.CPF, model.Id))
                 return Json("O CPF utilizado já está cadastrado");
 
             if (!this.ModelState.IsValid)
@@ -80,6 +80,13 @@ namespace WebAtividadeEntrevista.Controllers
 
                 Response.StatusCode = 400;
                 return Json(string.Join(Environment.NewLine, erros));
+            }
+
+            var beneficiarios = new List<Beneficiario>();
+
+            foreach (var item in model.Beneficiarios)
+            {
+                beneficiarios.Add(new Beneficiario(Id: item.Id, CPF: item.CPF, Nome: item.Nome));
             }
 
             bo.Alterar(new Cliente()
@@ -94,7 +101,8 @@ namespace WebAtividadeEntrevista.Controllers
                 Nome = model.Nome,
                 Sobrenome = model.Sobrenome,
                 Telefone = model.Telefone,
-                CPF = model.CPF
+                CPF = model.CPF,
+                Beneficiarios = beneficiarios
             });
 
             return Json("Cadastro alterado com sucesso");

@@ -26,5 +26,7 @@ namespace WebAtividadeEntrevista.Models
             this.Nome = Nome;
             this.IdCliente = IdCliente;
         }
+
+        public BeneficiarioModel() { }
     }
 }

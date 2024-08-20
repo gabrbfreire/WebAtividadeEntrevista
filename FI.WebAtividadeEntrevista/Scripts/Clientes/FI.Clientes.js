@@ -43,6 +43,8 @@ $(document).ready(function () {
     });
 
     $('#formCadastro').submit(function (e) {
+        let listaBeneficiariosJson = arr.map(s => Object.values(s)[0]);
+
         e.preventDefault();
         $.ajax({
             url: urlPost,
@@ -58,7 +60,7 @@ $(document).ready(function () {
                 "Logradouro": $(this).find("#Logradouro").val(),
                 "Telefone": $(this).find("#Telefone").val(),
                 "CPF": $(this).find("#CPF").val(),
-                "Beneficiarios": listaBeneficiarios
+                "Beneficiarios": listaBeneficiariosJson
             },
             error:
             function (r) {

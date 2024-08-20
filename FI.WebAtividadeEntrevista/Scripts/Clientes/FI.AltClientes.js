@@ -39,7 +39,6 @@ $(document).ready(function () {
 
     $('#formCadastro').submit(function (e) {
         e.preventDefault();
-        
         $.ajax({
             url: urlPost,
             method: "POST",
