@@ -1,6 +1,5 @@
 ﻿using FI.AtividadeEntrevista.BLL;
 using FI.AtividadeEntrevista.DML;
-using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,6 +107,13 @@ namespace WebAtividadeEntrevista.Controllers
             Cliente cliente = bo.Consultar(id);
             Models.ClienteModel model = null;
 
+            var beneficiarios = new List<BeneficiarioModel>();
+
+            foreach (var item in cliente.Beneficiarios)
+            {
+                beneficiarios.Add(new BeneficiarioModel(Id: item.Id, CPF: item.CPF, Nome: item.Nome));
+            }
+
             if (cliente != null)
             {
                 model = new ClienteModel()
@@ -122,7 +128,8 @@ namespace WebAtividadeEntrevista.Controllers
                     Nome = cliente.Nome,
                     Sobrenome = cliente.Sobrenome,
                     Telefone = cliente.Telefone,
-                    CPF = cliente.CPF
+                    CPF = cliente.CPF,
+                    Beneficiarios = beneficiarios
                 };
             }
 

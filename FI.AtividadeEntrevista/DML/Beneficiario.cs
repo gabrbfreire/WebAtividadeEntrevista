@@ -10,8 +10,9 @@
         public string CPF { get; set; }
         public string Nome { get; set; }
 
-        public Beneficiario(string CPF, string Nome, long IdCliente = 0)
+        public Beneficiario(string CPF, string Nome, long Id = 0, long IdCliente = 0)
         {
+            this.Id = Id;
             this.CPF = CPF;
             this.Nome = Nome;
             this.IdCliente = IdCliente;

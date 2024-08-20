@@ -18,5 +18,13 @@ namespace WebAtividadeEntrevista.Models
 
         [Required]
         public string Nome { get; set; }
+
+        public BeneficiarioModel(string CPF, string Nome, long Id = 0, long IdCliente = 0)
+        {
+            this.Id = Id;
+            this.CPF = CPF;
+            this.Nome = Nome;
+            this.IdCliente = IdCliente;
+        }
     }
 }
