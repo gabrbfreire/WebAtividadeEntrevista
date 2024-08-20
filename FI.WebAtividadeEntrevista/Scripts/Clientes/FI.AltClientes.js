@@ -32,6 +32,8 @@ $(document).ready(function () {
             alert('O CPF utilizado já está cadastrado');
         } else if (!validarCPF(document.getElementById("CpfBeneficiario").value)) {
             alert('CPF inválido');
+        } else if (nome == "") {
+            alert('Insira um Nome');
         } else {
             criarTabela(0, cpf, nome);
         }

@@ -140,13 +140,12 @@ namespace FI.AtividadeEntrevista.DAL
 
             foreach (var item in cliente.Beneficiarios)
             {
-                var parametrosBeneficiarios = new List<System.Data.SqlClient.SqlParameter>();
+                parametros = new List<System.Data.SqlClient.SqlParameter>();
+                parametros.Add(new System.Data.SqlClient.SqlParameter("Nome", item.Nome));
+                parametros.Add(new System.Data.SqlClient.SqlParameter("CPF", item.CPF));
+                parametros.Add(new System.Data.SqlClient.SqlParameter("ID", item.Id));
 
-                parametrosBeneficiarios.Add(new System.Data.SqlClient.SqlParameter("Nome", item.Nome));
-                parametrosBeneficiarios.Add(new System.Data.SqlClient.SqlParameter("CPF", item.CPF));
-                parametrosBeneficiarios.Add(new System.Data.SqlClient.SqlParameter("ID", item.Id));
-
-                base.Executar("FI_SP_AltBenef", parametrosBeneficiarios);
+                base.Executar("FI_SP_AltBenef", parametros);
             }
 
             var beneficiariosCliente = this.Consultar(cliente.Id).Beneficiarios;
@@ -158,6 +157,17 @@ namespace FI.AtividadeEntrevista.DAL
                 parametros = new List<System.Data.SqlClient.SqlParameter>();
                 parametros.Add(new System.Data.SqlClient.SqlParameter("ID", item.Id));
                 base.Executar("FI_SP_DelBenef", parametros);
+            }
+
+            var beneficiariosParaInclusao = cliente.Beneficiarios.Where(b => beneficiariosCliente.All(b2 => b2.Id != b.Id));
+
+            foreach (var item in beneficiariosParaInclusao)
+            {
+                parametros = new List<System.Data.SqlClient.SqlParameter>();
+                parametros.Add(new System.Data.SqlClient.SqlParameter("Nome", item.Nome));
+                parametros.Add(new System.Data.SqlClient.SqlParameter("CPF", item.CPF));
+                parametros.Add(new System.Data.SqlClient.SqlParameter("IDCLIENTE", cliente.Id));
+                base.Executar("FI_SP_IncBenef", parametros);
             }
         }
 
@@ -179,32 +189,41 @@ namespace FI.AtividadeEntrevista.DAL
             List<DML.Cliente> lista = new List<DML.Cliente>();
             if (ds != null && ds.Tables != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
+                var beneficiarios = new List<Beneficiario>();
+
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    DML.Cliente cli = new DML.Cliente();
-                    cli.Id = row.Field<long>("Id");
-                    cli.CEP = row.Field<string>("CEP");
-                    cli.Cidade = row.Field<string>("Cidade");
-                    cli.Email = row.Field<string>("Email");
-                    cli.Estado = row.Field<string>("Estado");
-                    cli.Logradouro = row.Field<string>("Logradouro");
-                    cli.Nacionalidade = row.Field<string>("Nacionalidade");
-                    cli.Nome = row.Field<string>("Nome");
-                    cli.Sobrenome = row.Field<string>("Sobrenome");
-                    cli.Telefone = row.Field<string>("Telefone");
-                    cli.CPF = row.Field<string>("CPF");
-
                     if (row.ItemArray[11].ToString() != "")
-                        cli.Beneficiarios.Add(
+                        beneficiarios.Add(
                             new Beneficiario(
                                 Id: row.Field<long>("BENEFICIARIO_ID"),
                                 Nome: row.Field<string>("BENEFICIARIO_NOME"),
-                                CPF: row.Field<string>("BENEFICIARIO_CPF")
+                                CPF: row.Field<string>("BENEFICIARIO_CPF"),
+                                IdCliente: row.Field<long>("BENEFICIARIO_IDCLIENTE")
                             )
                         );
 
-                    lista.Add(cli);
+                    if (lista.Where(l => l.Id == row.Field<long>("Id")).ToList().Count == 0)
+                    {
+                        DML.Cliente cli = new DML.Cliente();
+                        cli.Id = row.Field<long>("Id");
+                        cli.CEP = row.Field<string>("CEP");
+                        cli.Cidade = row.Field<string>("Cidade");
+                        cli.Email = row.Field<string>("Email");
+                        cli.Estado = row.Field<string>("Estado");
+                        cli.Logradouro = row.Field<string>("Logradouro");
+                        cli.Nacionalidade = row.Field<string>("Nacionalidade");
+                        cli.Nome = row.Field<string>("Nome");
+                        cli.Sobrenome = row.Field<string>("Sobrenome");
+                        cli.Telefone = row.Field<string>("Telefone");
+                        cli.CPF = row.Field<string>("CPF");
+
+                        lista.Add(cli);
+                    }
                 }
+
+                foreach(var item in lista)
+                    item.Beneficiarios = beneficiarios.Where(b => b.IdCliente == item.Id).ToList();
             }
             return lista;
         }
