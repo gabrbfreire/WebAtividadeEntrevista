@@ -138,15 +138,56 @@ function criarTabela(Id, CPF, Nome) {
     var random = Math.random().toString().replace('.', '');
     let texto =
         '<tr id="' + random + '">' +
-        '<td style="width:20%">' + CPF + '</td>' +
-        '<td style="width:50%">' + Nome + '</td>' +
+        '<td style="width:30%"><input type="text" class="form-control" id="' + random + 'cpf" disabled placeholder="Ex.: 010.011.111-00" data-mask="000.000.000-00" maxlength="14"></td>' +
+        '<td style="width:30%"><input type="text" class="form-control" id="' + random + 'nome" disabled></td>' +
         '<td style = "width:30%"> ' +
-        '<button type = "button" class="btn btn-primary" > Alterar</button> ' +
+        '<button id="' + random + 'alterar" type = "button" class="btn btn-primary"> Alterar</button> ' +
+        '<button id="' + random + 'confirmar" type = "button" class="btn btn-success">Confirmar</button> ' +
         '<button id="' + random + 'Button" type = "button" class="btn btn-primary" onclick="document.getElementById(\'' + random + '\').remove(); listaBeneficiarios.forEach(b => { if (b.CPF == \'' + CPF + '\') listaBeneficiarios.splice(listaBeneficiarios.indexOf(b), 1) });"> Excluir</button>' +
         '</td>' +
         '<tr>';
 
     $('#table').append(texto);
+
+    $("#" + random + "confirmar").hide();
+    $("#" + random + "cpf").val(CPF);
+    $("#" + random + "nome").val(Nome);
+
+    $("#" + random + "alterar").on("click", function () {
+        $("#" + random + "cpf").prop('disabled', false);
+        $("#" + random + "nome").prop('disabled', false);
+        $("#" + random + "alterar").hide();
+        $("#" + random + "confirmar").show();
+    });
+
+    $("#" + random + "confirmar").on("click", function () {
+        let cpf = $("#" + random + "cpf").val();
+        let nome = $("#" + random + "nome").val();
+        $("#" + random + "cpf").prop('disabled', true);
+        $("#" + random + "nome").prop('disabled', true);
+
+        let duplicado;
+        listaBeneficiarios.forEach(b => {
+            if (b.CPF == document.getElementById("CpfBeneficiario").value && b.Id != Id)
+                duplicado = true;
+        });
+
+        if (duplicado) {
+            alert('O CPF utilizado já está cadastrado');
+        } else if (!validarCPF(cpf)) {
+            alert('CPF inválido');
+            $("#" + random + "cpf").val(cpf);
+        } else if (nome == "") {
+            alert('Insira um Nome');
+        } else {
+            let item = listaBeneficiarios.find(o => o.Id == Id);
+            item.CPF = cpf;
+            item.Nome = nome;
+        }
+
+        $("#" + random + "alterar").show();
+        $("#" + random + "confirmar").hide();
+    });
 
     document.getElementById("CpfBeneficiario").value = '';
     document.getElementById("NomeBeneficiario").value = '';
