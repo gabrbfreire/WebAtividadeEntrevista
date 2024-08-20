@@ -1,9 +1,12 @@
 ﻿using FI.AtividadeEntrevista.DML;
+using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 
 namespace FI.AtividadeEntrevista.DAL
 {
@@ -30,7 +33,11 @@ namespace FI.AtividadeEntrevista.DAL
             parametros.Add(new System.Data.SqlClient.SqlParameter("Email", cliente.Email));
             parametros.Add(new System.Data.SqlClient.SqlParameter("Telefone", cliente.Telefone));
             parametros.Add(new System.Data.SqlClient.SqlParameter("CPF", cliente.CPF));
-            parametros.Add(new System.Data.SqlClient.SqlParameter("BENEFICIARIOS", cliente.Beneficiarios));
+            parametros.Add(new SqlParameter("@BENEFICIARIOS", SqlDbType.Structured)
+            {
+                TypeName = "dbo.Beneficiarios",
+                Value = SqlDataRecordsBeneficiarios(cliente.Beneficiarios)
+            });
 
             DataSet ds = base.Consultar("FI_SP_IncClienteV2", parametros);
             long ret = 0;
@@ -162,8 +169,25 @@ namespace FI.AtividadeEntrevista.DAL
                     lista.Add(cli);
                 }
             }
-
             return lista;
+        }
+
+        private List<SqlDataRecord> SqlDataRecordsBeneficiarios(IList<Beneficiario> beneficiarios)
+        {
+            List<SqlDataRecord> dataTable = new List<SqlDataRecord>();
+            SqlMetaData[] sqlMetaData = new SqlMetaData[3];
+            sqlMetaData[0] = new SqlMetaData("CPF", SqlDbType.NVarChar, 512);
+            sqlMetaData[1] = new SqlMetaData("Nome", SqlDbType.NVarChar, 512);
+            sqlMetaData[2] = new SqlMetaData("IdCliente", SqlDbType.BigInt);
+
+            foreach (var item in beneficiarios)
+            {
+                SqlDataRecord row = new SqlDataRecord(sqlMetaData);
+                row.SetValues(item.CPF, item.Nome, item.IdCliente);
+                dataTable.Add(row);
+            }
+
+            return dataTable;
         }
     }
 }

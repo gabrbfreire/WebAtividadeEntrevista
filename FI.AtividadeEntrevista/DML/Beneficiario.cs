@@ -5,20 +5,16 @@
     /// </summary>
     public class Beneficiario
     {
-        /// <summary>
-        /// Id
-        /// </summary>
         public long Id { get; set; }
-        public string IdCliente { get; set; }
-
-        /// <summary>
-        /// CPF
-        /// </summary>
+        public long IdCliente { get; set; }
         public string CPF { get; set; }
-
-        /// <summary>
-        /// Nome
-        /// </summary>
         public string Nome { get; set; }
+
+        public Beneficiario(string CPF, string Nome, long IdCliente = 0)
+        {
+            this.CPF = CPF;
+            this.Nome = Nome;
+            this.IdCliente = IdCliente;
+        }
     }
 }

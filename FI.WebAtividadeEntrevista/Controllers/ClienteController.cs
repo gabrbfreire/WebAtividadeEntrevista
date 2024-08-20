@@ -1,5 +1,6 @@
 ﻿using FI.AtividadeEntrevista.BLL;
 using FI.AtividadeEntrevista.DML;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,13 @@ namespace WebAtividadeEntrevista.Controllers
                 return Json(string.Join(Environment.NewLine, erros));
             }
 
+            var beneficiarios = new List<Beneficiario>();
+
+            foreach (var item in model.Beneficiarios)
+            {
+                beneficiarios.Add(new Beneficiario(item.CPF, item.Nome));
+            }
+
             model.Id = bo.Incluir(new Cliente()
             {
                 CEP = model.CEP,
@@ -51,7 +59,7 @@ namespace WebAtividadeEntrevista.Controllers
                 Sobrenome = model.Sobrenome,
                 Telefone = model.Telefone,
                 CPF = model.CPF,
-                Beneficiarios = model.Beneficiarios
+                Beneficiarios = beneficiarios
             });
 
             return Json("Cadastro efetuado com sucesso");
