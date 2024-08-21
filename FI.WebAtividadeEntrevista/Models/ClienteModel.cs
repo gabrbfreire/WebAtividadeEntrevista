@@ -69,7 +69,7 @@ namespace WebAtividadeEntrevista.Models
         /// CPF
         /// </summary>
         [Required]
-        [CpfAttribute (ErrorMessage = "Digite um CPF válido")]
+        [CpfAttribute(ErrorMessage = "Digite um CPF válido")]
         public string CPF { get; set; }
 
         public IList<BeneficiarioModel> Beneficiarios { get; set; } = new List<BeneficiarioModel>();

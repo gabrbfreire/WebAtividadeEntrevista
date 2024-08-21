@@ -16,7 +16,7 @@ namespace FI.WebAtividadeEntrevista.Models.Validation
             {
                 cpf = cpf.Trim().Replace(".", "").Replace("-", "");
 
-                if (cpf.Length != 11 || cpf.All(c => c == cpf[0])) 
+                if (cpf.Length != 11 || cpf.All(c => c == cpf[0]))
                     return false;
 
                 int[] multiplicadores1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };

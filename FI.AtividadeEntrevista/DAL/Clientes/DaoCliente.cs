@@ -1,12 +1,8 @@
 ﻿using FI.AtividadeEntrevista.DML;
 using Microsoft.SqlServer.Server;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 
 namespace FI.AtividadeEntrevista.DAL
 {
@@ -34,7 +30,7 @@ namespace FI.AtividadeEntrevista.DAL
             parametros.Add(new System.Data.SqlClient.SqlParameter("Telefone", cliente.Telefone));
             parametros.Add(new System.Data.SqlClient.SqlParameter("CPF", cliente.CPF));
 
-            if(cliente.Beneficiarios.Count > 0)
+            if (cliente.Beneficiarios.Count > 0)
                 parametros.Add(new System.Data.SqlClient.SqlParameter("@BENEFICIARIOS", SqlDbType.Structured)
                 {
                     TypeName = "dbo.Beneficiarios",
@@ -70,10 +66,8 @@ namespace FI.AtividadeEntrevista.DAL
 
             parametros.Add(new System.Data.SqlClient.SqlParameter("CPF", CPF));
 
-            if(Id != 0)
+            if (Id != 0)
                 parametros.Add(new System.Data.SqlClient.SqlParameter("ID", Id));
-            else
-                parametros.Add(new System.Data.SqlClient.SqlParameter("ID", 0));
 
             DataSet ds = base.Consultar("FI_SP_VerificaCliente", parametros);
 
@@ -222,7 +216,7 @@ namespace FI.AtividadeEntrevista.DAL
                     }
                 }
 
-                foreach(var item in lista)
+                foreach (var item in lista)
                     item.Beneficiarios = beneficiarios.Where(b => b.IdCliente == item.Id).ToList();
             }
             return lista;
