@@ -54,12 +54,10 @@ $(document).ready(function () {
             $("#" + random + "confirmar").on("click", function () {
                 let cpf = $("#" + random + "cpf").val();
                 let nome = $("#" + random + "nome").val();
-                $("#" + random + "cpf").prop('disabled', true);
-                $("#" + random + "nome").prop('disabled', true);
 
                 let duplicado;
                 listaBeneficiarios.forEach(b => {
-                    if (b.CPF == document.getElementById("CpfBeneficiario").value && b.Id != Id)
+                    if (b.CPF == $("#" + random + "cpf").val() && b.Id != Id)
                         duplicado = true;
                 });
 
@@ -74,10 +72,11 @@ $(document).ready(function () {
                     let item = listaBeneficiarios.find(o => o.Id == Id);
                     item.CPF = cpf;
                     item.Nome = nome;
+                    $("#" + random + "alterar").show();
+                    $("#" + random + "confirmar").hide();
+                    $("#" + random + "cpf").prop('disabled', true);
+                    $("#" + random + "nome").prop('disabled', true);
                 }
-
-                $("#" + random + "alterar").show();
-                $("#" + random + "confirmar").hide();
             });
 
             document.getElementById("CpfBeneficiario").value = '';
@@ -86,8 +85,6 @@ $(document).ready(function () {
     });
 
     $('#formCadastro').submit(function (e) {
-        let listaBeneficiariosJson = listaBeneficiarios.map(s => Object.values(s)[0]);
-
         e.preventDefault();
         $.ajax({
             url: urlPost,
@@ -103,7 +100,7 @@ $(document).ready(function () {
                 "Logradouro": $(this).find("#Logradouro").val(),
                 "Telefone": $(this).find("#Telefone").val(),
                 "CPF": $(this).find("#CPF").val(),
-                "Beneficiarios": listaBeneficiariosJson
+                "Beneficiarios": listaBeneficiarios
             },
             error:
             function (r) {
@@ -115,6 +112,7 @@ $(document).ready(function () {
             success:
             function (r) {
                 ModalDialog("Sucesso!", r)
+                listaBeneficiarios = [];
                 $("#formCadastro")[0].reset();
             }
         });
