@@ -29,11 +29,11 @@ $(document).ready(function () {
         });
 
         if (duplicado) {
-            alert('O CPF utilizado já está cadastrado');
+            ModalDialog("Ocorreu um erro", 'O CPF utilizado já está cadastrado');
         } else if (!validarCPF(document.getElementById("CpfBeneficiario").value)) {
-            alert('CPF inválido');
+            ModalDialog("Ocorreu um erro", 'CPF inválido');
         } else if (nome == "") {
-            alert('Insira um Nome');
+            ModalDialog("Ocorreu um erro", 'Insira um Nome');
         } else {
             criarTabela(0, cpf, nome);
         }
@@ -173,12 +173,12 @@ function criarTabela(Id, CPF, Nome) {
         });
 
         if (duplicado) {
-            alert('O CPF utilizado já está cadastrado');
+            ModalDialog("Ocorreu um erro", 'O CPF utilizado já está cadastrado');
         } else if (!validarCPF(cpf)) {
-            alert('CPF inválido');
+            ModalDialog("Ocorreu um erro", 'CPF inválido');
             $("#" + random + "cpf").val(cpf);
         } else if (nome == "") {
-            alert('Insira um Nome');
+            ModalDialog("Ocorreu um erro", 'Insira um Nome');
         } else {
             let item = listaBeneficiarios.find(o => o.Id == Id);
             item.CPF = cpf;
